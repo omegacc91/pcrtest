@@ -12,8 +12,34 @@ width: 300px;
 text-align: left;
 }
 
+table {
+  border-collapse: collapse;
+}
 
-input[type=text], select{
+th {
+  text-align: center;
+}
+
+table, th, td
+{
+    border: 1px solid #ccc;
+}
+
+td
+{
+    padding: 15px;
+}
+
+
+.panel_table{
+  display: inline-block;
+  padding: 40rpx;
+
+  text-align: left;
+  }
+  
+
+input[type=text], input[type=password], select{
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
