@@ -22,6 +22,7 @@
             </tr>
 
             <?php
+                include_once 'page.php';
                 //创建数据库连接
                 $conn = mysqli_connect("localhost", "root", "", "testdb");
 
@@ -31,11 +32,31 @@
                 }
                 //echo "连接成功";
 
-                $sql = "select * from tbl_user order by uid DESC";
+                //$sql = "select * from tbl_user order by uid DESC";
+                $sql = "select count(uid) as total from tbl_user";
                     
                 //执行查询语句
                 $res = mysqli_query($conn, $sql);
                 
+                //从结果集中取得一行作为关联数组
+                $oneArray = mysqli_fetch_array($res);
+
+                //得到总记录数
+                $totalNumber = $oneArray['total'];
+
+                //设置每一页显示多少条数据
+                $perPage = 10;
+
+                //获取当前访问的页数
+                $page = $_GET['page'] ?? 1;
+
+                //调用分页函数
+                paging($totalNumber, $perPage);
+
+                $sql = "select * from tbl_user order by uid DESC limit $firstCount, $perPage";
+
+                $res = mysqli_query($conn, $sql);
+
                 //统计结果行数
                 $count = mysqli_num_rows($res);
             
@@ -71,11 +92,12 @@
                 }
 
             ?>
-
-
-
-
         </table>
+        <div>
+            <?php
+            echo "$pageNav";
+            ?>
+        </div> 
     </div>
 
 </body>
