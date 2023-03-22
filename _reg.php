@@ -24,7 +24,7 @@ $sql = "INSERT INTO tbl_user (fullname, dorm, telephone, college, class, counsel
 $result = mysqli_query($conn, $sql);
 
 if ($result) {
-    header('location:'. '/phpcourse/reg_info.php');
+    header('location:'. '/reg_info.php');
 } 
 else {
     echo "录入失败！<br>" ;

@@ -10,6 +10,16 @@
 <body>
 
     <div class='div_parent'>
+		<div class ="error"> 
+            <?php 
+                session_start();
+                if(isset($_SESSION['login']))
+                {
+                    echo $_SESSION['login'];
+                    unset($_SESSION['login']);
+                }
+            ?>
+        </div>
 		<h2>管理员登录</h2>
 		<form action='_login.php' method='post' class='index_form'>
 			<label >用户名:</label>
@@ -17,7 +27,7 @@
 			<label >密码:</label>
 			<input type='password' name='password' ><br>
 
-			<input type='submit' value='提交'>
+			<input type='submit' value='登录'>
 		</form>
 	<div>
     

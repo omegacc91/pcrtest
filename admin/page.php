@@ -13,7 +13,7 @@ if (!function_exists('paging')) {
         //$pageNav：页面导航条代码，函数内部并没有将它输出；
         global $firstCount, $pageNav;
         //定义全局变量，除了用global声明以外，还可以使用$GLOBALS["firstCount"] = 5这种方式来定义。然后在函数外面，就可以使用$firstCount了。
-        $page = $_GET['page'] ?? 1;
+        $page = isset($_GET['page']) ?  $_GET['page'] : 1;
         //echo "page:".$page."<br>";
         //如果$url使用默认，即空值，则赋值为本页URL：
         if (!$url) {
@@ -25,7 +25,7 @@ if (!function_exists('paging')) {
         /*echo "parse_url:";
         print_r($parse_url);
         echo "<br>";*/
-        $url_query = $parse_url["query"] ?? ''; //单独取出URL的查询字串
+        $url_query = isset($parse_url["query"]) ?  $parse_url["query"] : ''; //单独取出URL的查询字串
         //echo "url_query:".$url_query."<br>";
         if ($url_query) {
             //因为URL中可能包含了页码信息，我们要把它去掉，以便加入新的页码信息。

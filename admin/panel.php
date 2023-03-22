@@ -9,6 +9,31 @@
 </head>
 <body>
     <div class='div_parent'>
+        <h4>
+            <nav class="navbar">
+                <a href="panel.php">首页</a> 
+                <a href="list_admin.php">管理员</a> 
+                <a href="logout.php">退出</a> 
+            </nav>
+        </h4>
+        <div class ="success"> 
+            <?php 
+                session_start();
+                //访问控制，检查管理员是否登录
+                if(!isset($_SESSION['username'])) //如果username session未设置
+                {
+                    //用户未登录，跳转到登录页面
+                    header('location:'. '/admin/index.php');
+                }
+
+                //如果用户登录成功，提示登录信息
+                if(isset($_SESSION['login']))
+                {
+                    echo $_SESSION['login'];
+                    unset($_SESSION['login']);
+                }
+            ?>
+        </div>
         <h2>核酸检测登记信息</h2>
         <table class='panel_table'>
             <tr>
@@ -48,7 +73,7 @@
                 $perPage = 10;
 
                 //获取当前访问的页数
-                $page = $_GET['page'] ?? 1;
+                $page = isset($_GET['page']) ?  $_GET['page'] : 1;
 
                 //调用分页函数
                 paging($totalNumber, $perPage);
@@ -71,8 +96,6 @@
                         $counseller = $row['counseller'];
                         $test_date = $row['test_date'];
                         ?>
-
-
                         <tr>
                             <td><?php echo $fullname  ?></td>
                             <td><?php echo $dorm  ?></td>
@@ -95,7 +118,7 @@
         </table>
         <div>
             <?php
-            echo "$pageNav";
+            echo "$pageNav";//输出分页栏
             ?>
         </div> 
     </div>
